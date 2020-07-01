@@ -1,6 +1,6 @@
 # Multi objective optimization tool
 
-This tools implements two different methods for choosing the best option given a set of different objectives. It has two different algorithms, AHP and Promehtee.
+This tools implements two different methods for choosing the best option given a set of different objectives. It has two different algorithms, AHP and Promehtee. The examples are a choice between different cargo companies with different criterion.
 
 ### Download
 
