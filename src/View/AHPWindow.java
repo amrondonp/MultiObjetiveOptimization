@@ -95,11 +95,11 @@ public class AHPWindow extends javax.swing.JFrame implements ComponentListener {
 
     textareaCriteria.setColumns(20);
     textareaCriteria.setRows(5);
-    textareaCriteria.setText("Costo\n" + 
-        "Tiempo de tansporte\n" + 
-        "Capacidad\n" + 
-        "Cumplimiento\n" + 
-        "Impacto ambiental");
+    textareaCriteria.setText("Costo:min\n" + 
+        "Tiempo de tansporte:min\n" + 
+        "Capacidad:max\n" + 
+        "Cumplimiento:max\n" + 
+        "Impacto ambiental:min");
     
     jScrollPane3.setViewportView(textareaCriteria);
 
