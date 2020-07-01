@@ -7,10 +7,8 @@
 package View;
 
 import Model.AHP;
-
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
-
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableColumnModel;
@@ -95,12 +93,14 @@ public class AHPWindow extends javax.swing.JFrame implements ComponentListener {
 
     textareaCriteria.setColumns(20);
     textareaCriteria.setRows(5);
-    textareaCriteria.setText("Costo:min\n" + 
-        "Tiempo de tansporte:min\n" + 
-        "Capacidad:max\n" + 
-        "Cumplimiento:max\n" + 
-        "Impacto ambiental:min");
-    
+    textareaCriteria.setText(
+      "Costo:min\n" +
+      "Tiempo de tansporte:min\n" +
+      "Capacidad:max\n" +
+      "Cumplimiento:max\n" +
+      "Impacto ambiental:min"
+    );
+
     jScrollPane3.setViewportView(textareaCriteria);
 
     labelCriteria.setText("Ingrese Criterios:");
@@ -382,8 +382,7 @@ public class AHPWindow extends javax.swing.JFrame implements ComponentListener {
 
   private String[] arrayCriteria;
 
-  private void btncreateAlternativesTableActionPerformed(
-      ) { //GEN-FIRST:event_btncreateAlternativesTableActionPerformed
+  private void btncreateAlternativesTableActionPerformed() { //GEN-FIRST:event_btncreateAlternativesTableActionPerformed
     // TODO add your handling code here:
     int numAlter = Integer.parseInt(numAlternatives.getText());
     DefaultTableModel model = (DefaultTableModel) tableAlternatives.getModel();
@@ -400,7 +399,11 @@ public class AHPWindow extends javax.swing.JFrame implements ComponentListener {
         if (j == 0) {
           tableAlternatives.setValueAt((i + 1), i, j);
         } else {
-          tableAlternatives.setValueAt(Math.floor(Math.random() * 7 * 100) / 100, i, j);
+          tableAlternatives.setValueAt(
+            Math.floor(Math.random() * 7 * 100) / 100,
+            i,
+            j
+          );
         }
       }
     }
@@ -413,9 +416,7 @@ public class AHPWindow extends javax.swing.JFrame implements ComponentListener {
     new AHPResultsWindow(ahp.getOutputlog(), ahp.getGlobalPriorityVector());
   } //GEN-LAST:event_btnApplyAHPActionPerformed
 
-  private void btncreateCriteriaTableActionPerformed(
-   
-  ) { //GEN-FIRST:event_btncreateCriteriaTableActionPerformed
+  private void btncreateCriteriaTableActionPerformed() { //GEN-FIRST:event_btncreateCriteriaTableActionPerformed
     // TODO add your handling code here:
     arrayCriteria = textareaCriteria.getText().split("[\\r\\n]+");
     DefaultTableModel model = (DefaultTableModel) tableCriteria.getModel();
@@ -512,18 +513,19 @@ public class AHPWindow extends javax.swing.JFrame implements ComponentListener {
   private javax.swing.JTable tableAlternatives;
   private javax.swing.JTable tableCriteria;
   private javax.swing.JTextArea textareaCriteria;
+
   // End of variables declaration//GEN-END:variables
 
   @Override
   public void componentResized(ComponentEvent e) {
     // TODO Auto-generated method stub
-    
+
   }
 
   @Override
   public void componentMoved(ComponentEvent e) {
     // TODO Auto-generated method stub
-    
+
   }
 
   @Override
@@ -537,12 +539,12 @@ public class AHPWindow extends javax.swing.JFrame implements ComponentListener {
   private void fillCriterionComparison() {
     // TODO Auto-generated method stub
     DefaultTableModel model = (DefaultTableModel) tableCriteria.getModel();
-    for(int i = 0 ; i < model.getRowCount() ; i++) {
-      for(int j = i ; j < model.getColumnCount(); j++) {
-        if(j == 0) {
+    for (int i = 0; i < model.getRowCount(); i++) {
+      for (int j = i; j < model.getColumnCount(); j++) {
+        if (j == 0) {
           continue;
         }
-        if(j == i + 1) {
+        if (j == i + 1) {
           model.setValueAt(1, i, j);
         } else {
           double randomValue = Math.floor(Math.random() * 10 * 100) / 100;
@@ -556,6 +558,6 @@ public class AHPWindow extends javax.swing.JFrame implements ComponentListener {
   @Override
   public void componentHidden(ComponentEvent e) {
     // TODO Auto-generated method stub
-    
+
   }
 }
