@@ -7,6 +7,10 @@
 package View;
 
 import Model.AHP;
+
+import java.awt.event.ComponentEvent;
+import java.awt.event.ComponentListener;
+
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableColumnModel;
@@ -16,7 +20,7 @@ import javax.swing.table.TableColumnModel;
  * @author Edwin
  */
 
-public class AHPWindow extends javax.swing.JFrame {
+public class AHPWindow extends javax.swing.JFrame implements ComponentListener {
   private static final long serialVersionUID = 2860318781560523921L;
 
   public AHPWindow() {
@@ -49,6 +53,7 @@ public class AHPWindow extends javax.swing.JFrame {
 
     setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+    numAlternatives.setText("4");
     numAlternatives.addActionListener(
       new java.awt.event.ActionListener() {
 
@@ -63,7 +68,7 @@ public class AHPWindow extends javax.swing.JFrame {
       new java.awt.event.ActionListener() {
 
         public void actionPerformed(java.awt.event.ActionEvent evt) {
-          btncreateAlternativesTableActionPerformed(evt);
+          btncreateAlternativesTableActionPerformed();
         }
       }
     );
@@ -90,6 +95,12 @@ public class AHPWindow extends javax.swing.JFrame {
 
     textareaCriteria.setColumns(20);
     textareaCriteria.setRows(5);
+    textareaCriteria.setText("Costo\n" + 
+        "Tiempo de tansporte\n" + 
+        "Capacidad\n" + 
+        "Cumplimiento\n" + 
+        "Impacto ambiental");
+    
     jScrollPane3.setViewportView(textareaCriteria);
 
     labelCriteria.setText("Ingrese Criterios:");
@@ -99,7 +110,7 @@ public class AHPWindow extends javax.swing.JFrame {
       new java.awt.event.ActionListener() {
 
         public void actionPerformed(java.awt.event.ActionEvent evt) {
-          btncreateCriteriaTableActionPerformed(evt);
+          btncreateCriteriaTableActionPerformed();
         }
       }
     );
@@ -362,6 +373,7 @@ public class AHPWindow extends javax.swing.JFrame {
     );
 
     pack();
+    this.addComponentListener(this);
   } // </editor-fold>//GEN-END:initComponents
 
   private void numAlternativesActionPerformed(java.awt.event.ActionEvent evt) { //GEN-FIRST:event_numAlternativesActionPerformed
@@ -371,8 +383,7 @@ public class AHPWindow extends javax.swing.JFrame {
   private String[] arrayCriteria;
 
   private void btncreateAlternativesTableActionPerformed(
-    java.awt.event.ActionEvent evt
-  ) { //GEN-FIRST:event_btncreateAlternativesTableActionPerformed
+      ) { //GEN-FIRST:event_btncreateAlternativesTableActionPerformed
     // TODO add your handling code here:
     int numAlter = Integer.parseInt(numAlternatives.getText());
     DefaultTableModel model = (DefaultTableModel) tableAlternatives.getModel();
@@ -389,7 +400,7 @@ public class AHPWindow extends javax.swing.JFrame {
         if (j == 0) {
           tableAlternatives.setValueAt((i + 1), i, j);
         } else {
-          //tableAlternatives.setValueAt(0, i, j);
+          tableAlternatives.setValueAt(Math.floor(Math.random() * 7 * 100) / 100, i, j);
         }
       }
     }
@@ -403,7 +414,7 @@ public class AHPWindow extends javax.swing.JFrame {
   } //GEN-LAST:event_btnApplyAHPActionPerformed
 
   private void btncreateCriteriaTableActionPerformed(
-    java.awt.event.ActionEvent evt
+   
   ) { //GEN-FIRST:event_btncreateCriteriaTableActionPerformed
     // TODO add your handling code here:
     arrayCriteria = textareaCriteria.getText().split("[\\r\\n]+");
@@ -502,4 +513,49 @@ public class AHPWindow extends javax.swing.JFrame {
   private javax.swing.JTable tableCriteria;
   private javax.swing.JTextArea textareaCriteria;
   // End of variables declaration//GEN-END:variables
+
+  @Override
+  public void componentResized(ComponentEvent e) {
+    // TODO Auto-generated method stub
+    
+  }
+
+  @Override
+  public void componentMoved(ComponentEvent e) {
+    // TODO Auto-generated method stub
+    
+  }
+
+  @Override
+  public void componentShown(ComponentEvent e) {
+    // TODO Auto-generated method stub
+    this.btncreateCriteriaTableActionPerformed();
+    this.btncreateAlternativesTableActionPerformed();
+    this.fillCriterionComparison();
+  }
+
+  private void fillCriterionComparison() {
+    // TODO Auto-generated method stub
+    DefaultTableModel model = (DefaultTableModel) tableCriteria.getModel();
+    for(int i = 0 ; i < model.getRowCount() ; i++) {
+      for(int j = i ; j < model.getColumnCount(); j++) {
+        if(j == 0) {
+          continue;
+        }
+        if(j == i + 1) {
+          model.setValueAt(1, i, j);
+        } else {
+          double randomValue = Math.floor(Math.random() * 10 * 100) / 100;
+          model.setValueAt(randomValue, i, j);
+          model.setValueAt(1 / randomValue, j - 1, i + 1);
+        }
+      }
+    }
+  }
+
+  @Override
+  public void componentHidden(ComponentEvent e) {
+    // TODO Auto-generated method stub
+    
+  }
 }
