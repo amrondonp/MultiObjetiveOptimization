@@ -400,7 +400,7 @@ public class AHPWindow extends javax.swing.JFrame implements ComponentListener {
           tableAlternatives.setValueAt((i + 1), i, j);
         } else {
           tableAlternatives.setValueAt(
-            Math.floor(Math.random() * 7 * 100) / 100,
+            Math.floor((Math.random() + 1) * 7 * 100) / 100,
             i,
             j
           );
@@ -547,7 +547,7 @@ public class AHPWindow extends javax.swing.JFrame implements ComponentListener {
         if (j == i + 1) {
           model.setValueAt(1, i, j);
         } else {
-          double randomValue = Math.floor(Math.random() * 10 * 100) / 100;
+          double randomValue = Math.floor((Math.random() + 1) * 10 * 100) / 100;
           model.setValueAt(randomValue, i, j);
           model.setValueAt(1 / randomValue, j - 1, i + 1);
         }
