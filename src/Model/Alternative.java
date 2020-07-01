@@ -13,121 +13,117 @@ import java.util.Objects;
  *
  * @author mauricio
  */
-public class Alternative implements Comparable<Alternative>{
-    private String name;
-    private List<Double> values;
-    private double posFlux;
-    private double negFlux;
-    private double netFlux;
-    
-    public Alternative(){
-        name = "";
-        values = new ArrayList<>();
-    }
-    
-    
-    /**
-     * @return the name
-     */
-    public String getName() {
-        return name;
-    }
+public class Alternative implements Comparable<Alternative> {
+  private String name;
+  private List<Double> values;
+  private double posFlux;
+  private double negFlux;
+  private double netFlux;
 
-    /**
-     * @param name the name to set
-     */
-    public void setName(String name) {
-        this.name = name;
-    }
+  public Alternative() {
+    name = "";
+    values = new ArrayList<>();
+  }
 
-    
-    
-    @Override
-    public String toString() {
-        return name + " " + getValues() ;
-    }
+  /**
+   * @return the name
+   */
+  public String getName() {
+    return name;
+  }
 
-    /**
-     * @return the values
-     */
-    public List<Double> getValues() {
-        return values;
-    }
+  /**
+   * @param name the name to set
+   */
+  public void setName(String name) {
+    this.name = name;
+  }
 
-    /**
-     * @param values the values to set
-     */
-    public void setValues(List<Double> values) {
-        this.values = values;
-    }
+  @Override
+  public String toString() {
+    return name + " " + getValues();
+  }
 
-    public void addValue(double parseDouble) {
-        this.values.add(parseDouble);
-    }
-    
-    @Override
-    public boolean equals(Object o){
-        if(o instanceof Alternative){
-            Alternative aux = (Alternative)o;
-            return this.name.equals(aux.name);
-        }
-        return false;
-    }
+  /**
+   * @return the values
+   */
+  public List<Double> getValues() {
+    return values;
+  }
 
-    @Override
-    public int hashCode() {
-        int hash = 5;
-        hash = 83 * hash + Objects.hashCode(this.name);
-        return hash;
-    }
+  /**
+   * @param values the values to set
+   */
+  public void setValues(List<Double> values) {
+    this.values = values;
+  }
 
-    /**
-     * @return the posFlux
-     */
-    public double getPosFlux() {
-        return posFlux;
-    }
+  public void addValue(double parseDouble) {
+    this.values.add(parseDouble);
+  }
 
-    /**
-     * @param posFlux the posFlux to set
-     */
-    public void setPosFlux(double posFlux) {
-        this.posFlux = posFlux;
+  @Override
+  public boolean equals(Object o) {
+    if (o instanceof Alternative) {
+      Alternative aux = (Alternative) o;
+      return this.name.equals(aux.name);
     }
+    return false;
+  }
 
-    /**
-     * @return the negFlux
-     */
-    public double getNegFlux() {
-        return negFlux;
-    }
+  @Override
+  public int hashCode() {
+    int hash = 5;
+    hash = 83 * hash + Objects.hashCode(this.name);
+    return hash;
+  }
 
-    /**
-     * @param negFlux the negFlux to set
-     */
-    public void setNegFlux(double negFlux) {
-        this.negFlux = negFlux;
-    }
+  /**
+   * @return the posFlux
+   */
+  public double getPosFlux() {
+    return posFlux;
+  }
 
-    /**
-     * @return the netFlux
-     */
-    public double getNetFlux() {
-        return netFlux;
-    }
+  /**
+   * @param posFlux the posFlux to set
+   */
+  public void setPosFlux(double posFlux) {
+    this.posFlux = posFlux;
+  }
 
-    /**
-     * @param netFlux the netFlux to set
-     */
-    public void setNetFlux(double netFlux) {
-        this.netFlux = netFlux;
-    }
+  /**
+   * @return the negFlux
+   */
+  public double getNegFlux() {
+    return negFlux;
+  }
 
-    @Override
-    public int compareTo(Alternative o) {
-        if(this.netFlux > o.netFlux) return -1;
-        else if(this.netFlux < o.netFlux ) return 1;
-        else return 0;
-    }
-    
+  /**
+   * @param negFlux the negFlux to set
+   */
+  public void setNegFlux(double negFlux) {
+    this.negFlux = negFlux;
+  }
+
+  /**
+   * @return the netFlux
+   */
+  public double getNetFlux() {
+    return netFlux;
+  }
+
+  /**
+   * @param netFlux the netFlux to set
+   */
+  public void setNetFlux(double netFlux) {
+    this.netFlux = netFlux;
+  }
+
+  @Override
+  public int compareTo(Alternative o) {
+    if (this.netFlux > o.netFlux) return -1; else if (
+      this.netFlux < o.netFlux
+    ) return 1; else return 0;
+  }
 }

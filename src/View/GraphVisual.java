@@ -30,83 +30,88 @@ import org.apache.commons.collections15.Transformer;
  * @author mauricio
  */
 public class GraphVisual extends JFrame {
+  private Map<Alternative, List<Alternative>> graph;
+  private DirectedGraph<String, String> g;
 
-    private Map<Alternative, List<Alternative>> graph;
-    private DirectedGraph<String, String> g;
-    
-    private Stack<Alternative> s = new Stack<>();
-    private TreeSet<Alternative> visited = new TreeSet<>();
-    
-    private void dfs(Alternative node, boolean first){
-        //if(visited.contains(node)) return;
-        visited.add(node);
-        
-        for(Alternative nei : graph.get(node)){
-            if(!visited.contains(nei)){
-                if(!first)
-                    g.addEdge(node.getName()+nei.getName(), node.getName(),nei.getName());
-                dfs(nei,first);
-            }
-        }
-        
-        if(first)s.add(node);
-    }
-    
-    public GraphVisual(Map<Alternative, List<Alternative>> graph) {
-        super("Solución PROMETHEE 2");
-        this.graph = graph;
-        showGraph();
+  private Stack<Alternative> s = new Stack<>();
+  private TreeSet<Alternative> visited = new TreeSet<>();
+
+  private void dfs(Alternative node, boolean first) {
+    //if(visited.contains(node)) return;
+    visited.add(node);
+
+    for (Alternative nei : graph.get(node)) {
+      if (!visited.contains(nei)) {
+        if (!first) g.addEdge(
+          node.getName() + nei.getName(),
+          node.getName(),
+          nei.getName()
+        );
+        dfs(nei, first);
+      }
     }
 
-    public void showGraph() {
-        g = new DirectedSparseGraph<>();
+    if (first) s.add(node);
+  }
 
-        for (Alternative a : graph.keySet()) {
-            g.addVertex(a.getName());
-            if(!visited.contains(a)){
-                dfs(a,true);
-            }
-            /*for (Alternative e : graph.get(a)) {
+  public GraphVisual(Map<Alternative, List<Alternative>> graph) {
+    super("Solución PROMETHEE 2");
+    this.graph = graph;
+    showGraph();
+  }
+
+  public void showGraph() {
+    g = new DirectedSparseGraph<>();
+
+    for (Alternative a : graph.keySet()) {
+      g.addVertex(a.getName());
+      if (!visited.contains(a)) {
+        dfs(a, true);
+      }
+      /*for (Alternative e : graph.get(a)) {
                 g.addEdge(a.getName() + e.getName(), a.getName(), e.getName());
             }*/
-        }
-        visited.clear();
+    }
+    visited.clear();
 
-        ArrayList<Alternative> alternatives = new ArrayList<>();
-        alternatives.addAll(graph.keySet());
-        Collections.sort(alternatives);
-        
-        for(Alternative a : alternatives){
-            if(!visited.contains(a)){
-                dfs(a,false);
-            }
-        }
-        
-        /*
+    ArrayList<Alternative> alternatives = new ArrayList<>();
+    alternatives.addAll(graph.keySet());
+    Collections.sort(alternatives);
+
+    for (Alternative a : alternatives) {
+      if (!visited.contains(a)) {
+        dfs(a, false);
+      }
+    }
+
+    /*
         while(!s.empty()){
             if(!visited.contains(s.peek())){
                 dfs(s.peek(),false);
             }
             s.pop();
         }*/
-        
-        Layout<String, String> layout = new CircleLayout(g);
-        layout.setSize(new Dimension(370, 300));
 
-        Transformer<String, Paint> vertexPaint = new Transformer<String, Paint>() {
-            @Override
-            public Paint transform(String i) {
-                return Color.GREEN;
-            }
-        };
+    Layout<String, String> layout = new CircleLayout(g);
+    layout.setSize(new Dimension(370, 300));
 
-        BasicVisualizationServer<String, String> vv = new BasicVisualizationServer<>(layout);
-        vv.getRenderContext().setVertexFillPaintTransformer(vertexPaint);
-        vv.getRenderContext().setVertexLabelTransformer(new ToStringLabeller());
-        vv.setPreferredSize(new Dimension(420, 350));
+    Transformer<String, Paint> vertexPaint = new Transformer<String, Paint>() {
 
-        this.setLocation(750, 0);
-        this.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-        this.getContentPane().add(vv);
-    }
+      @Override
+      public Paint transform(String i) {
+        return Color.GREEN;
+      }
+    };
+
+    BasicVisualizationServer<String, String> vv = new BasicVisualizationServer<>(
+      layout
+    );
+    vv.getRenderContext().setVertexFillPaintTransformer(vertexPaint);
+    vv.getRenderContext().setVertexLabelTransformer(new ToStringLabeller());
+    vv.setPreferredSize(new Dimension(420, 350));
+
+    this.setLocation(750, 0);
+    this.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+    this.getContentPane().add(vv);
+  }
 }
