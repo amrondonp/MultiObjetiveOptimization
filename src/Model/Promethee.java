@@ -94,7 +94,7 @@ public class Promethee {
   }
 
   public void computeFlows() {
-    //Computing preference indexes
+    // Computing preference indexes
     int n = alternatives.size();
     for (int i = 0; i < n; i++) {
       for (int j = 0; j < n; j++) {
@@ -122,8 +122,8 @@ public class Promethee {
   }
 
   public List<Alternative> getTotalOrder() {
-    //System.out.println(criteria);
-    //System.out.println(getAlternatives());
+    // System.out.println(criteria);
+    // System.out.println(getAlternatives());
     List<Alternative> sorted = new ArrayList<>();
     computeFlows();
 
@@ -178,7 +178,7 @@ public class Promethee {
         "Tipo",
         "Peso",
         "Min/Max",
-        "Parámetros"
+        "Parametros"
       )
     );
     sb.append("------------------------------------------------------------\n");

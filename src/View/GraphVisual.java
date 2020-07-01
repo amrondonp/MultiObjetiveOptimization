@@ -5,6 +5,13 @@
  */
 package View;
 
+import Model.Alternative;
+import edu.uci.ics.jung.algorithms.layout.CircleLayout;
+import edu.uci.ics.jung.algorithms.layout.Layout;
+import edu.uci.ics.jung.graph.DirectedGraph;
+import edu.uci.ics.jung.graph.DirectedSparseGraph;
+import edu.uci.ics.jung.visualization.BasicVisualizationServer;
+import edu.uci.ics.jung.visualization.decorators.ToStringLabeller;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Paint;
@@ -14,18 +21,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Stack;
 import java.util.TreeSet;
-
 import javax.swing.JFrame;
-
 import org.apache.commons.collections15.Transformer;
-
-import Model.Alternative;
-import edu.uci.ics.jung.algorithms.layout.CircleLayout;
-import edu.uci.ics.jung.algorithms.layout.Layout;
-import edu.uci.ics.jung.graph.DirectedGraph;
-import edu.uci.ics.jung.graph.DirectedSparseGraph;
-import edu.uci.ics.jung.visualization.BasicVisualizationServer;
-import edu.uci.ics.jung.visualization.decorators.ToStringLabeller;
 
 /**
  *
@@ -33,7 +30,7 @@ import edu.uci.ics.jung.visualization.decorators.ToStringLabeller;
  */
 public class GraphVisual extends JFrame {
   private static final long serialVersionUID = 1428287443354946650L;
-  
+
   private Map<Alternative, List<Alternative>> graph;
   private DirectedGraph<String, String> g;
 
@@ -41,7 +38,7 @@ public class GraphVisual extends JFrame {
   private TreeSet<Alternative> visited = new TreeSet<>();
 
   private void dfs(Alternative node, boolean first) {
-    //if(visited.contains(node)) return;
+    // if(visited.contains(node)) return;
     visited.add(node);
 
     for (Alternative nei : graph.get(node)) {
@@ -59,7 +56,7 @@ public class GraphVisual extends JFrame {
   }
 
   public GraphVisual(Map<Alternative, List<Alternative>> graph) {
-    super("Solución PROMETHEE 2");
+    super("Solucion PROMETHEE 2");
     this.graph = graph;
     showGraph();
   }
@@ -72,9 +69,10 @@ public class GraphVisual extends JFrame {
       if (!visited.contains(a)) {
         dfs(a, true);
       }
-      /*for (Alternative e : graph.get(a)) {
-                g.addEdge(a.getName() + e.getName(), a.getName(), e.getName());
-            }*/
+      /*
+       * for (Alternative e : graph.get(a)) { g.addEdge(a.getName() + e.getName(),
+       * a.getName(), e.getName()); }
+       */
     }
     visited.clear();
 
@@ -89,14 +87,13 @@ public class GraphVisual extends JFrame {
     }
 
     /*
-        while(!s.empty()){
-            if(!visited.contains(s.peek())){
-                dfs(s.peek(),false);
-            }
-            s.pop();
-        }*/
+     * while(!s.empty()){ if(!visited.contains(s.peek())){ dfs(s.peek(),false); }
+     * s.pop(); }
+     */
 
-    Layout<String, String> layout = (Layout<String, String>)new CircleLayout<String, String>(g);
+    Layout<String, String> layout = (Layout<String, String>) new CircleLayout<String, String>(
+      g
+    );
     layout.setSize(new Dimension(370, 300));
 
     Transformer<String, Paint> vertexPaint = new Transformer<String, Paint>() {
@@ -111,7 +108,9 @@ public class GraphVisual extends JFrame {
       layout
     );
     vv.getRenderContext().setVertexFillPaintTransformer(vertexPaint);
-    vv.getRenderContext().setVertexLabelTransformer(new ToStringLabeller<String>());
+    vv
+      .getRenderContext()
+      .setVertexLabelTransformer(new ToStringLabeller<String>());
     vv.setPreferredSize(new Dimension(420, 350));
 
     this.setLocation(750, 0);
