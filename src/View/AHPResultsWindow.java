@@ -19,6 +19,7 @@ import org.jfree.data.category.DefaultCategoryDataset;
  */
 
 public class AHPResultsWindow extends JFrame {
+  private static final long serialVersionUID = 8865317884366978038L;
   private JPanel panelGraphResults = new JPanel();
   private JScrollPane scrollpane = new JScrollPane();
   private JTextArea textareaResults = new JTextArea();

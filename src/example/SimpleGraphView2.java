@@ -54,7 +54,7 @@ public class SimpleGraphView2 {
   public static void main(String[] args) {
     SimpleGraphView2 sgv = new SimpleGraphView2(); // This builds the graph
     // Layout<V, E>, VisualizationComponent<V,E>
-    Layout<Integer, String> layout = new CircleLayout(sgv.g);
+    Layout<Integer, String> layout = new CircleLayout<Integer, String>(sgv.g);
     layout.setSize(new Dimension(300, 300));
     BasicVisualizationServer<Integer, String> vv = new BasicVisualizationServer<Integer, String>(
       layout
@@ -85,8 +85,8 @@ public class SimpleGraphView2 {
     };
     vv.getRenderContext().setVertexFillPaintTransformer(vertexPaint);
     vv.getRenderContext().setEdgeStrokeTransformer(edgeStrokeTransformer);
-    vv.getRenderContext().setVertexLabelTransformer(new ToStringLabeller());
-    vv.getRenderContext().setEdgeLabelTransformer(new ToStringLabeller());
+    vv.getRenderContext().setVertexLabelTransformer(new ToStringLabeller<Integer>());
+    vv.getRenderContext().setEdgeLabelTransformer(new ToStringLabeller<String>());
     vv.getRenderer().getVertexLabelRenderer().setPosition(Position.CNTR);
 
     JFrame frame = new JFrame("Simple Graph View 2");
